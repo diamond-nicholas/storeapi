@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
   res.send('this works live now');
 });
 
+//route
+
+app.use('/api/v1/products');
+
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
