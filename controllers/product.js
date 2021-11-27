@@ -1,3 +1,4 @@
+const { query } = require('express');
 const Product = require('../models/product');
 
 const getAllProductStatic = async (req, res) => {
@@ -7,10 +8,13 @@ const getAllProductStatic = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const { featured } = req.query;
+  const { featured, company } = req.query;
   const queryObject = {};
   if (featured) {
     queryObject.featured = featured === 'true' ? true : false;
+  }
+  if (company) {
+    queryObject.company = company;
   }
   const products = await Product.find(queryObject);
   res.status(200).json({ products, nbHits: products.length });
